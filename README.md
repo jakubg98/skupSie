@@ -1,3 +1,7 @@
+Gra stworzona w technologi C# WPF w celach projektowych z przedmiotu JPWP - sem5.
+
+-------------------------------------------------------------------------------------------
+
 1. Proponowany tytuł gry: “Skup się”
 2. Technologia wykonania : C#
 3. Cel jaki przyświeca grze: Rozwój zdolności utrzymywania skupienia wśród młodych
@@ -14,5 +18,5 @@ zdobywanie jak najwyższego wyniku.
 
 ----------------------------------------------------------------------------------------------
 
-łącze do 
-https://trello.com/b/OW5WqeOL/skup-sie
+Tablica do nawigacji projektem: https://trello.com/b/OW5WqeOL/skup-sie
+
