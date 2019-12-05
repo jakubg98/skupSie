@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace skupSie.Properties
+namespace SkupSieGra.Properties
 {
 
 
