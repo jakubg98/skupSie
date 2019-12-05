@@ -9,6 +9,7 @@
     <Grid>
         <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="60" Stroke="Black" VerticalAlignment="Top" Width="60" Margin="370,10,0,0"/>
         <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Margin="370,295,0,0"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="177,140,0,0"/>
 
     </Grid>
 </Window>
