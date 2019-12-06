@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkupSieGra"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="60" Stroke="Black" VerticalAlignment="Top" Width="60" Margin="370,10,0,0"/>
-        <Ellipse Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Margin="370,295,0,0"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="177,140,0,0"/>
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
 
-    </Grid>
+    <Canvas>
+
+        <Ellipse x:Name="elipsa" Panel.ZIndex="3" Fill="Red" Canvas.Left="375" Canvas.Top="29" Width="50" Height="50" />
+        <Rectangle Panel.ZIndex="2" Fill="Green" Canvas.Left="375" Canvas.Top="335" Width="50" Height="50" />
+        <Line Panel.ZIndex="1" X1="400" Y1="20" X2="400" Y2="400" Stroke="Black" StrokeThickness="2" />
+
+    </Canvas>
 </Window>
