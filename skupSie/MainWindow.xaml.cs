@@ -53,6 +53,5 @@ namespace SkupSieGra
                 gracz2.Opacity = 1;
             }
         }
-
     }
 }
