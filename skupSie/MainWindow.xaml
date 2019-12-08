@@ -9,10 +9,13 @@
 
     <Canvas>
 
-        <Ellipse x:Name="elipsa" Panel.ZIndex="3" Fill="Red" Canvas.Left="375" Canvas.Top="29" Width="50" Height="50" />
+        <Ellipse x:Name="obstacle1" Panel.ZIndex="3" Fill="Red" Canvas.Left="375" Canvas.Top="29" Width="50" Height="50" />
+        <Rectangle x:Name="obstacle2" Panel.ZIndex="3" Fill="Red" Canvas.Left="375" Canvas.Top="29" Width="50" Height="50" />
         <Rectangle x:Name="gracz1" Panel.ZIndex="2" Fill="Green" Canvas.Left="375" Canvas.Top="335" Width="50" Height="50" Opacity="1"/>
         <Ellipse x:Name="gracz2" Panel.ZIndex="2" Fill="Green" Canvas.Left="375" Canvas.Top="335" Width="50" Height="50" Opacity="0"/>
-        <Line Panel.ZIndex="1" X1="400" Y1="20" X2="400" Y2="400" Stroke="Black" StrokeThickness="2" />
 
+        <Line Panel.ZIndex="1" X1="400" Y1="20" X2="400" Y2="400" Stroke="Black" StrokeThickness="2" />
+        <Label x:Name="lblSeconds" Content="label" Canvas.Left="528" Canvas.Top="283"/>
+        <Label x:Name= "rndGen" Content="Label" Canvas.Left="546" Canvas.Top="233"/>
     </Canvas>
 </Window>
