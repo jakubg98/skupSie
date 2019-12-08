@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Timers;
+using System.Windows.Threading;
 
 namespace SkupSieGra
 {
@@ -22,69 +22,101 @@ namespace SkupSieGra
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool isCircle;
+        bool expectedCircle;
+        int score;
+        bool begin = true;
+        Random random = new Random();
+        int interval = 2;   //use to set duration/timeinterval,
+        TranslateTransform translateTransform = new TranslateTransform();
+        DoubleAnimation doubleAnimation = new DoubleAnimation();
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
-
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Start();
-
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        public void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblSeconds.Content = DateTime.Now.Second;
-            Random rnd = new Random();
-            int x = rnd.Next(0, 2);
-            rndGen.Content = x;
-            if (x ==0)
+            SetGoal();
+
+            doubleAnimation.From = 29;
+            doubleAnimation.To = 300;
+            doubleAnimation.Duration = TimeSpan.FromSeconds(interval);
+
+            this.StartGame(sender, e);
+        }
+
+        public void SetGoal()
+        {
+            bool randomBool = random.Next(0, 2) > 0;
+            if (randomBool)
             {
-                obstacle2.Opacity = 0;
-                obstacle1.Opacity = 1;
+                expectedCircle = true;
+                elipsa.RenderTransform = translateTransform;
+                elipsa.Visibility = Visibility.Visible;
+                kwadrat.Visibility = Visibility.Collapsed;
             }
-            if (x == 1)
+            else
             {
-                    obstacle2.Opacity = 1;
-                    obstacle1.Opacity = 0;
+                expectedCircle = false;
+                kwadrat.RenderTransform = translateTransform;
+                elipsa.Visibility = Visibility.Collapsed;
+                kwadrat.Visibility = Visibility.Visible;
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void StartGame(object sender, RoutedEventArgs e)
         {
-            TranslateTransform trans = new TranslateTransform();
-            obstacle1.RenderTransform = trans;
-            obstacle2.RenderTransform = trans;
-            DoubleAnimation anim = new DoubleAnimation(29, 300, TimeSpan.FromSeconds(3));
-            trans.BeginAnimation(TranslateTransform.YProperty, anim);
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(interval);
 
-            //add fucntion that loops falling of obstacles
+            translateTransform.BeginAnimation(TranslateTransform.YProperty, doubleAnimation);
+            dispatcherTimer.Start();
+            expectedCircle = true;
 
-            if (Canvas.GetTop(obstacle1) == 290) 
+            dispatcherTimer.Tick += TimerTicked;
+        }
+
+        private void TimerTicked(object sender, EventArgs args)
+        {
+            dispatcherTimer.Stop();
+            if (expectedCircle != isCircle)
             {
-                obstacle1.RenderTransform = trans;
-                obstacle2.RenderTransform = trans;
-                DoubleAnimation anim2 = new DoubleAnimation(29, 300, TimeSpan.FromSeconds(3));
-                trans.BeginAnimation(TranslateTransform.YProperty, anim2);
+                MessageBox.Show("game over");
+                score = 0;
+                Application.Current.MainWindow.Close();
             }
+
+            score++;
+            label.Content = score;
+            SetGoal();
+            AddNewObject();
+        }
+
+        private void AddNewObject()
+        {
+            translateTransform.BeginAnimation(TranslateTransform.YProperty, doubleAnimation);
+            dispatcherTimer.Start();
         }
 
         private void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.K)
+            switch (e.Key)
             {
-                gracz1.Opacity = 1;
-                gracz2.Opacity = 0;
-                //needs to be done : add variable that changes its value when each key is down; this will be used later in collision 
-                //eg. if(Key=K) collisionHelper = 0; if key=O then collisionHelper = 1; 
-                //each time shape gets to character this is being checked and result is shown in messageBox for now
-            }
-            if (e.Key == Key.O)
-            {
-                gracz1.Opacity = 0;
-                gracz2.Opacity = 1;
+                case Key.Up:
+                    gracz1.Opacity = 1;
+                    gracz2.Opacity = 0;
+                    isCircle = false;
+                    break;
+                case Key.Down:
+                    gracz1.Opacity = 0;
+                    gracz2.Opacity = 1;
+                    isCircle = true;
+                    break;
+                default:
+                    break;
             }
         }
 
