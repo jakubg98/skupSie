@@ -15,6 +15,7 @@
         <Ellipse x:Name="gracz2" Panel.ZIndex="2" Fill="Green" Canvas.Left="375" Canvas.Top="335" Width="50" Height="50" Opacity="0"/>
         <Line Panel.ZIndex="1" X1="400" Y1="20" X2="400" Y2="400" Stroke="Black" StrokeThickness="2" />
         <Label Name="label" Content="" Canvas.Left="63" Canvas.Top="47" Width="104"/>
-        
+        <Label Name="labelHighScore" Content="" Canvas.Left="542" Canvas.Top="66" Width="104"/>
+
     </Canvas>
 </Window>

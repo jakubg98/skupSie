@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.IO;
 
 namespace SkupSieGra
 {
@@ -22,6 +23,7 @@ namespace SkupSieGra
     /// </summary>
     public partial class MainWindow : Window
     {
+        int highestScore;
         bool isCircle;
         bool expectedCircle;
         int score;
@@ -34,8 +36,15 @@ namespace SkupSieGra
 
         public MainWindow()
         {
+            LoadFromBinary(highestScore);
+
+            //labelHighScore.Content = highestScore;
+
+
             InitializeComponent();
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
+
+            SaveToBinary(highestScore);
         }
 
         public void Window_Loaded(object sender, RoutedEventArgs e)
@@ -47,6 +56,46 @@ namespace SkupSieGra
             doubleAnimation.Duration = TimeSpan.FromSeconds(interval);
 
             this.StartGame(sender, e);
+        }
+
+
+        void LoadFromBinary(int highScore)
+        {
+            try
+            {
+                string dir = @"C:\Users\gocek\Source\Repos\jakubg98\skupSie\skupSie\temp";
+                string serializationFile = System.IO.Path.Combine(dir, "highScore.bin");
+
+                using (Stream stream = File.Open(serializationFile, FileMode.Open))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                    highestScore = highScore;
+                    labelHighScore.Content = highestScore;
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("Unable to load previous data.");
+                return;
+            }
+        }
+
+
+        void SaveToBinary(int highScore)
+        {
+
+            string dir = @"C:\Users\gocek\Source\Repos\jakubg98\skupSie\skupSie\temp";
+            string serializationFile = System.IO.Path.Combine(dir, "highScore.bin");
+
+            //serialize
+            using (Stream stream = File.Open(serializationFile, FileMode.Create))
+            {
+                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                bformatter.Serialize(stream, highScore);
+            }
+
         }
 
         public void SetGoal()
@@ -91,6 +140,8 @@ namespace SkupSieGra
 
             score++;
             label.Content = score;
+           // labelHighScore.Content = highestScore;
+
             SetGoal();
             AddNewObject();
         }
