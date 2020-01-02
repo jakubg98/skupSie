@@ -38,13 +38,10 @@ namespace SkupSieGra
         {
             LoadFromBinary(highestScore);
 
-            //labelHighScore.Content = highestScore;
-
-
             InitializeComponent();
+            labelHighScore.Content = highestScore;
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
 
-            SaveToBinary(highestScore);
         }
 
         public void Window_Loaded(object sender, RoutedEventArgs e)
@@ -70,8 +67,8 @@ namespace SkupSieGra
                 {
                     var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-                    highestScore = highScore;
-                    labelHighScore.Content = highestScore;
+                    int score  = (int)bformatter.Deserialize(stream);
+                    highestScore = score;
                 }
             }
             catch (FileNotFoundException ex)
@@ -95,7 +92,6 @@ namespace SkupSieGra
 
                 bformatter.Serialize(stream, highScore);
             }
-
         }
 
         public void SetGoal()
@@ -130,17 +126,24 @@ namespace SkupSieGra
 
         private void TimerTicked(object sender, EventArgs args)
         {
+            labelHighScore.Content = highestScore;
+
             dispatcherTimer.Stop();
             if (expectedCircle != isCircle)
             {
-                MessageBox.Show("game over");
+                MessageBox.Show("GAME OVER");
+
+                if (score > highestScore)
+                {
+                    SaveToBinary(score);
+                }
+
                 score = 0;
                 Application.Current.MainWindow.Close();
             }
 
             score++;
             label.Content = score;
-           // labelHighScore.Content = highestScore;
 
             SetGoal();
             AddNewObject();
