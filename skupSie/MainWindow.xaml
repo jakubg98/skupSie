@@ -23,6 +23,18 @@
             </Image.Source>
         </Image>
 
+        <Image Panel.ZIndex="1" Width="36" Canvas.Left="699" Canvas.Top="8" Height="35" Opacity="0" >
+            <Image.Source>
+                <BitmapImage   UriSource="/images/playButton.jpg" />
+            </Image.Source>
+        </Image>
+
+        <Button Panel.ZIndex="3" Opacity="0"  x:Name="buttonESC" Content="ButtonESC" Width="50" Canvas.Left="735" Height="33" Canvas.Top="10" Click="button_Click"/>
+        <Button Panel.ZIndex="3" Opacity="0" x:Name="buttonQ" Content="Button" Width="37" Canvas.Left="663" Height="33" Canvas.Top="10" Click="buttonQ_Click_1"/>
+        <TextBlock  Panel.ZIndex="4" Opacity="0" x:Name="textBlock" TextWrapping="Wrap" Text="test help" Height="233" Width="163" Canvas.Left="58" Canvas.Top="88" Foreground="White"/>
+        <Label x:Name="labelGameOver" FontSize="40" Opacity="0" Panel.ZIndex="4" Foreground="RED" Content="KONIEC GRY" Width="358" Height="67" Canvas.Left="253" Canvas.Top="216"/>
+
+
 
     </Canvas>
 </Window>

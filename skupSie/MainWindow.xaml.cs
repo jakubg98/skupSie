@@ -131,6 +131,7 @@ namespace SkupSieGra
             dispatcherTimer.Stop();
             if (expectedCircle != isCircle)
             {
+                labelGameOver.Opacity = 1;
                 MessageBox.Show("GAME OVER");
 
                 if (score > highestScore)
@@ -138,6 +139,7 @@ namespace SkupSieGra
                     SaveToBinary(score);
                 }
 
+               
                 score = 0;
                 Application.Current.MainWindow.Close();
             }
@@ -174,5 +176,18 @@ namespace SkupSieGra
             }
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            score = 0;
+            Application.Current.MainWindow.Close();
+        }
+
+        private void buttonQ_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (textBlock.Opacity == 1)
+                textBlock.Opacity = 0;
+            else
+                textBlock.Opacity = 1;
+        }
     }
 }
