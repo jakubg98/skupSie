@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SkupSieGra"
         mc:Ignorable="d"
         Title="MainWindow" WindowStyle="None" ResizeMode="NoResize" Height="450" Width="800" Loaded="Window_Loaded">
-    
+
 
     <Canvas>
 
@@ -14,9 +14,15 @@
         <Ellipse x:Name="elipsa" Panel.ZIndex="3" Fill="Red" Canvas.Left="375" Canvas.Top="29" Width="50" Height="50" Visibility="Collapsed" />
         <Rectangle x:Name="gracz1" Panel.ZIndex="2" Fill="Green" Canvas.Left="375" Canvas.Top="335" Width="50" Height="50" Opacity="1"/>
         <Ellipse x:Name="gracz2" Panel.ZIndex="2" Fill="Green" Canvas.Left="375" Canvas.Top="335" Width="50" Height="50" Opacity="0"/>
-        <Line Panel.ZIndex="1" X1="400" Y1="20" X2="400" Y2="400" Stroke="Black" StrokeThickness="2" />
-        <Label Name="label" Content="" Canvas.Left="63" Canvas.Top="47" Width="104"/>
-        <Label Name="labelHighScore" Content="" Canvas.Left="542" Canvas.Top="66" Width="104"/>
+        <Label Name="label" Foreground="White" Panel.ZIndex="3" Content="0" Canvas.Left="424" Canvas.Top="8" Width="73" FontSize="20" Height="35" />
+        <Label Name="labelHighScore" FontSize="20" Foreground="White" Panel.ZIndex="3" Content="x" Canvas.Left="148" Width="73" Height="35" Canvas.Top="8"/>
+
+        <Image Panel.ZIndex="1" >
+            <Image.Source>
+                <BitmapImage   UriSource="/images/gui.jpg" />
+            </Image.Source>
+        </Image>
+
 
     </Canvas>
 </Window>
