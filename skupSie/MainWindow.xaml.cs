@@ -34,6 +34,7 @@ namespace SkupSieGra
         DoubleAnimation doubleAnimation = new DoubleAnimation();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
+
         public MainWindow()
         {
             LoadFromBinary(highestScore);
@@ -41,7 +42,6 @@ namespace SkupSieGra
             InitializeComponent();
             labelHighScore.Content = highestScore;
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
-
         }
 
         public void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,7 +54,6 @@ namespace SkupSieGra
 
             this.StartGame(sender, e);
         }
-
 
         void LoadFromBinary(int highScore)
         {
@@ -119,8 +118,6 @@ namespace SkupSieGra
 
             translateTransform.BeginAnimation(TranslateTransform.YProperty, doubleAnimation);
             dispatcherTimer.Start();
-            expectedCircle = true;
-
             dispatcherTimer.Tick += TimerTicked;
         }
 
@@ -132,7 +129,9 @@ namespace SkupSieGra
             if (expectedCircle != isCircle)
             {
                 labelGameOver.Opacity = 1;
-                MessageBox.Show("GAME OVER");
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+
 
                 if (score > highestScore)
                 {
@@ -178,6 +177,11 @@ namespace SkupSieGra
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            if (score > highestScore)
+            {
+                SaveToBinary(score);
+            }
+
             score = 0;
             Application.Current.MainWindow.Close();
         }
@@ -188,6 +192,22 @@ namespace SkupSieGra
                 textBlock.Opacity = 0;
             else
                 textBlock.Opacity = 1;
+        }
+
+        private void buttonPause_Click(object sender, RoutedEventArgs e)
+        {
+            if(playButton.Opacity==0)
+            {
+                playButton.Opacity = 1;
+                dispatcherTimer.Stop();
+               // this.StartGame(sender, e); weird shit happens
+            }
+            else
+            {
+                playButton.Opacity = 0;
+                dispatcherTimer.Start();
+
+            }
         }
     }
 }
