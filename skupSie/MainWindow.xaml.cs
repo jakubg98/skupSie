@@ -34,7 +34,9 @@ namespace SkupSieGra
         DoubleAnimation doubleAnimation = new DoubleAnimation();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
-
+        /// <summary>
+        /// Main function of the game which loads highest score, initializes all components and reads player's keyboard input
+        /// </summary>
         public MainWindow()
         {
             LoadFromBinary(highestScore);
@@ -44,6 +46,11 @@ namespace SkupSieGra
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
         }
 
+        /// <summary>
+        /// to be done
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SetGoal();
@@ -55,6 +62,10 @@ namespace SkupSieGra
             this.StartGame(sender, e);
         }
 
+        /// <summary>
+        /// Function which loads the highest score from locally stored binary file
+        /// </summary>
+        /// <param name="highScore"></param>
         void LoadFromBinary(int highScore)
         {
             try
@@ -77,7 +88,10 @@ namespace SkupSieGra
             }
         }
 
-
+        /// <summary>
+        /// Function which saves the highest score to locally stored binary file
+        /// </summary>
+        /// <param name="highScore"></param>
         void SaveToBinary(int highScore)
         {
 
@@ -93,6 +107,9 @@ namespace SkupSieGra
             }
         }
 
+        /// <summary>
+        /// Function which chooses what obstacle will appear at the top of the screen 
+        /// </summary>
         public void SetGoal()
         {
             bool randomBool = random.Next(0, 2) > 0;
@@ -112,6 +129,11 @@ namespace SkupSieGra
             }
         }
 
+        /// <summary>
+        /// to be done
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartGame(object sender, RoutedEventArgs e)
         {
             dispatcherTimer.Interval = TimeSpan.FromSeconds(interval);
@@ -121,6 +143,11 @@ namespace SkupSieGra
             dispatcherTimer.Tick += TimerTicked;
         }
 
+        /// <summary>
+        /// Function that for each interval of Timer checks whether player should score or lose. Each animation of falling obstacle lasts the same amount of time as interval of Timer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void TimerTicked(object sender, EventArgs args)
         {
             labelHighScore.Content = highestScore;
@@ -129,18 +156,15 @@ namespace SkupSieGra
             if (expectedCircle != isCircle)
             {
                 labelGameOver.Opacity = 1;
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                Application.Current.Shutdown();
-
+                blackBackground.Opacity = 1;
+                labelGameOver2.Opacity = 1;
 
                 if (score > highestScore)
                 {
                     SaveToBinary(score);
                 }
 
-               
                 score = 0;
-                Application.Current.MainWindow.Close();
             }
 
             score++;
@@ -150,12 +174,20 @@ namespace SkupSieGra
             AddNewObject();
         }
 
+        /// <summary>
+        /// Function used in animation of falling obstacles
+        /// </summary>
         private void AddNewObject()
         {
             translateTransform.BeginAnimation(TranslateTransform.YProperty, doubleAnimation);
             dispatcherTimer.Start();
         }
 
+        /// <summary>
+        /// Function that reads user's keyboard input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -170,11 +202,23 @@ namespace SkupSieGra
                     gracz2.Opacity = 1;
                     isCircle = true;
                     break;
-                default:
+                case Key.Escape:
+                    Application.Current.MainWindow.Close();
                     break;
+                case Key.Space:
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                    break;
+                default:
+                    break;                
             }
         }
 
+        /// <summary>
+        /// Funcionality for Escape button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Click(object sender, RoutedEventArgs e)
         {
             if (score > highestScore)
@@ -186,6 +230,11 @@ namespace SkupSieGra
             Application.Current.MainWindow.Close();
         }
 
+        /// <summary>
+        /// Funcionality for Question Mark button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonQ_Click_1(object sender, RoutedEventArgs e)
         {
             if (textBlock.Opacity == 1)
@@ -194,19 +243,22 @@ namespace SkupSieGra
                 textBlock.Opacity = 1;
         }
 
+        /// <summary>
+        /// Funcionality for Pause button 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonPause_Click(object sender, RoutedEventArgs e)
         {
             if(playButton.Opacity==0)
             {
                 playButton.Opacity = 1;
                 dispatcherTimer.Stop();
-               // this.StartGame(sender, e); weird shit happens
             }
             else
             {
                 playButton.Opacity = 0;
                 dispatcherTimer.Start();
-
             }
         }
     }

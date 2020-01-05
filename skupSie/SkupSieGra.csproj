@@ -95,6 +95,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\blackBackground.jpg" />
     <Resource Include="images\gui.jpg" />
   </ItemGroup>
   <ItemGroup>
