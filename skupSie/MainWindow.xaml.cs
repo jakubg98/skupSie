@@ -47,7 +47,7 @@ namespace SkupSieGra
         }
 
         /// <summary>
-        /// to be done
+        /// Occurs when the element is laid out and rendered
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -102,7 +102,6 @@ namespace SkupSieGra
             using (Stream stream = File.Open(serializationFile, FileMode.Create))
             {
                 var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
                 bformatter.Serialize(stream, highScore);
             }
         }
@@ -130,14 +129,13 @@ namespace SkupSieGra
         }
 
         /// <summary>
-        /// to be done
+        /// Function which starts the timer and animations
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void StartGame(object sender, RoutedEventArgs e)
         {
             dispatcherTimer.Interval = TimeSpan.FromSeconds(interval);
-
             translateTransform.BeginAnimation(TranslateTransform.YProperty, doubleAnimation);
             dispatcherTimer.Start();
             dispatcherTimer.Tick += TimerTicked;
@@ -155,23 +153,24 @@ namespace SkupSieGra
             dispatcherTimer.Stop();
             if (expectedCircle != isCircle)
             {
-                labelGameOver.Opacity = 1;
-                blackBackground.Opacity = 1;
-                labelGameOver2.Opacity = 1;
-
                 if (score > highestScore)
                 {
                     SaveToBinary(score);
                 }
 
+                labelGameOver.Opacity = 1;
+                blackBackground.Opacity = 1;
+                labelGameOver2.Opacity = 1;
                 score = 0;
             }
+            else
+            {
+                score++;
+                label.Content = score;
 
-            score++;
-            label.Content = score;
-
-            SetGoal();
-            AddNewObject();
+                SetGoal();
+                AddNewObject();
+            }
         }
 
         /// <summary>
@@ -203,6 +202,10 @@ namespace SkupSieGra
                     isCircle = true;
                     break;
                 case Key.Escape:
+                    if (score > highestScore)
+                    {
+                        SaveToBinary(score);
+                    }
                     Application.Current.MainWindow.Close();
                     break;
                 case Key.Space:
