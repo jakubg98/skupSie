@@ -157,7 +157,7 @@ namespace SkupSieGra
                 {
                     SaveToBinary(score);
                 }
-
+                textBlock.Opacity = 0;
                 labelGameOver.Opacity = 1;
                 blackBackground.Opacity = 1;
                 labelGameOver2.Opacity = 1;
@@ -200,6 +200,10 @@ namespace SkupSieGra
                     gracz1.Opacity = 0;
                     gracz2.Opacity = 1;
                     isCircle = true;
+                    break;
+                case Key.R:
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
                     break;
                 case Key.Escape:
                     if (score > highestScore)

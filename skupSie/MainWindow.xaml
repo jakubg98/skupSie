@@ -37,7 +37,11 @@
 
         <Button Panel.ZIndex="3" Opacity="0"  x:Name="buttonESC" Content="ButtonESC" Width="50" Canvas.Left="735" Height="33" Canvas.Top="10" Click="button_Click"/>
         <Button Panel.ZIndex="3" Opacity="0" x:Name="buttonQ" Content="Button" Width="37" Canvas.Left="663" Height="33" Canvas.Top="10" Click="buttonQ_Click_1"/>
-        <TextBlock  Panel.ZIndex="4" Opacity="0" x:Name="textBlock" TextWrapping="Wrap" Text="test help" Height="233" Width="163" Canvas.Left="58" Canvas.Top="88" Foreground="White"/>
+        <TextBlock  Panel.ZIndex="4" Opacity="0" TextAlignment="Center" x:Name="textBlock" FontSize="14" TextWrapping="Wrap" Text="DOPASUJ KSZTAŁT DO NADLATUJĄCYCH PRZESZKÓD STRZAŁKA W GÓRĘ ABY WYBRAĆ OKRĄG
+                    STRZAŁKA W DÓŁ ABY WYBRAĆ KWADRAT
+                    SPACJA ABY SPRÓBOWAĆ PONOWNIE
+                    ESCAPE ABY WYŁĄCZYĆ GRĘ
+                    " Height="143" Width="334" Canvas.Left="17" Canvas.Top="143" Foreground="White"/>
         <Label x:Name="labelGameOver"  FontSize="40" Opacity="0" Panel.ZIndex="4" Foreground="RED" Content="KONIEC GRY" Width="232" Height="66" Canvas.Left="284" Canvas.Top="143" />
         <Button x:Name="buttonPause" Panel.ZIndex="3" Opacity="0" Content="Button" Width="30" Height="33" Canvas.Left="700" RenderTransformOrigin="0.5,0.5" Canvas.Top="10" Click="buttonPause_Click"/>
         <Label x:Name="labelGameOver2" FontSize="20" Panel.ZIndex="4" Opacity="0" Foreground="RED" Content="NACIŚNIJ SPACJĘ ABY KONTYNUOWAĆ" Width="363" Canvas.Left="226" Height="40" Canvas.Top="214"/>
