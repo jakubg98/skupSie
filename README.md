@@ -1,4 +1,4 @@
-Gra stworzona w technologi C# WPF w celach projektowych z przedmiotu JPWP - sem5.
+Gra stworzona w technologi C# WPF w celach projektowych z przedmiotu Języki Programowania Wysokiego Poziomu - sem5.
 
 -------------------------------------------------------------------------------------------
 
