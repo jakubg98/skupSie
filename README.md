@@ -29,5 +29,4 @@ Install
 git clone https://github.com/jakubgoc/keepFocus.git </br>
 cd keepFocus </br>
 cd skupSie </br>
-SkupSieGra.sln </br>
-Build and Run
+keepFocus.lnk
