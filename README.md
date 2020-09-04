@@ -20,3 +20,14 @@ zdobywanie jak najwyższego wyniku.
 
 Tablica do nawigacji projektem: https://trello.com/b/OW5WqeOL/skup-sie
 
+Requirments
+
+
+
+Install
+
+git clone https://github.com/jakubgoc/keepFocus.git </br>
+cd keepFocus </br>
+cd skupSie </br>
+SkupSieGra.sln </br>
+Build and Run
