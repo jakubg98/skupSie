@@ -67,7 +67,7 @@ namespace SkupSieGra
         /// </summary>
         /// <param name="highScore"></param>
         void LoadFromBinary(int highScore)
-        {
+        {/*//to be repaired, direction of saving/reading file should be redeterminated
             try
             {
                 string dir = @"C:\Users\gocek\Source\Repos\jakubg98\skupSie\skupSie\temp";
@@ -85,7 +85,7 @@ namespace SkupSieGra
             {
                 Console.WriteLine("Unable to load previous data.");
                 return;
-            }
+            }*/
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace SkupSieGra
         /// </summary>
         /// <param name="highScore"></param>
         void SaveToBinary(int highScore)
-        {
+        {/* //to be repaired, direction of saving/reading file should be redeterminated
 
             string dir = @"C:\Users\gocek\Source\Repos\jakubg98\skupSie\skupSie\temp";
             string serializationFile = System.IO.Path.Combine(dir, "highScore.bin");
@@ -103,7 +103,7 @@ namespace SkupSieGra
             {
                 var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                 bformatter.Serialize(stream, highScore);
-            }
+            } */
         }
 
         /// <summary>
